@@ -1,3 +1,24 @@
+% totalError = calculateInterpolationError(f, x0, y0, H, coefficients) -
+% funkcja obliczajaca blad sredniokwadratowy dla interpolacji liniowej
+% funkcji f na 2n^2 trojkatach przystajacych wpisanych w kwadrat o boku H,
+% ktorego lewy dolny wierzcholek ma wspolrzedne (x0, y0). Wspolczynniki
+% funkcji interpolujacych sa zawarte w 4-wymiarowej tablicy coefficients.
+%
+% Wartosci bledu interpolacji dla kazdego trojkata sa obliczane w jego
+% srodku ciezkosci.
+%
+% Wejscie:
+% f - funkcja interpolowana
+% x0, y0 - wspolrzedne lewego dolnego wierzcholka kwadratu
+% H - dlugosc boku kwadratu
+% coefficients - 4-wymiarowa tablica zawierajaca wspolczynniki dla funkcji
+% interpolujacych (zobacz **help calculateCoefficientsSquare**)
+%
+% Wyjscie:
+% totalError - wartosc bledu sredniokwadratowego interpolacji
+%
+% Autor: Grzegorz Rozdzialik (D4, gr. lab. 2)
+
 function totalError = calculateInterpolationError(f, x0, y0, H, coefficients)
 % Ilosc podzialow
 n = size(coefficients, 1);
@@ -8,7 +29,7 @@ totalError = 0;
 
 for i=1:n
     for j=1:n
-        % Obliczenie wspolrzednych kwadratu zawierajacego dwa trojk¹ty
+        % Obliczenie wspolrzednych kwadratu zawierajacego dwa trojkaty
         bottomLeftX = x0 + j*h;
         bottomLeftY = y0 + i*h;
         [gravityCenter1, gravityCenter2] = getTrianglesGravityCenter(bottomLeftX, bottomLeftY, h);

@@ -1,8 +1,24 @@
-% interpolacja na kwadracie (dzieli kwadrat na dwa trojkaty przystajace)
-% (x0, y0) - lewy dolny rog kwadratu
-% coefficients - wspolczynniki do funkcji interpolujacej:
-%   - na trojkacie majacym kat prosty w lewym gornym rogu kwadratu
-%   - na trojkacie majacym kat prosty w prawym dolnym rogu kwadratu
+% coefficients = calculateCoefficientsSingleSquare(f, x0, y0, h) - funkcja
+% obliczajaca wspolczynniki dla liniowej funkcji interpolujacej na
+% kwadracie o boku h, ktorego lewym dolny wierzcholek ma wspolrzedne
+% (x0, y0).
+%
+% Funkcja dzieli opisany kwadrat na dwa trojkaty przystajace (jeden
+% zawierajacy lewy i gorny bok kwadratu oraz przekatna, drugi bedacy
+% dopelnieniem pierwszego) i wykonuje interpolacje na tych trojkatach.
+%
+% Wejscie:
+% f - uchwyt do funkcji interpolowanej (f: RxR -> R)
+% x0, y0 - wspolrzedne lewego dolnego wierzcholka kwadratu
+% h - dlugosc boku kwadratu
+%
+% Wyjscie:
+% coefficients - macierz 2x3 majaca jako pierwsza kolumne wspolczynniki
+% funkcji interpolujacej dla pierwszego trojkata (lewa gorna polowa
+% kwadratu), jako druga kolumna - wspolczynniki dla drugiego trojkata
+% (prawa dolna polowa kwadratu)
+%
+% Autor: Grzegorz Rozdzialik (D4, gr. lab. 2)
 
 function coefficients = calculateCoefficientsSingleSquare(f, x0, y0, h)
 coefficients = zeros(2, 3);

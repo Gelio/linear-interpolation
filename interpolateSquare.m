@@ -1,9 +1,33 @@
-% displayType:
-% * 0 - none (only log)
-% * 1 - only exact values
-% * 2 - only interpolated values
-% * 3 - exact and interpolated values
-% * 4 - error
+% interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType) - funkcja
+% tworzaca w nowym oknie wykres dla interpolacji funkcji f na kwadracie o
+% boku H, ktorego lewym dolnym wierzcholkiem jest punkt (x0, y0), dzielac
+% go na 2n^2 trojkatow przystajacych. Podzial kwadratu jest zageszczany, az
+% do osiagniecia bledu sredniokwadratowego, mierzonego w srodkach ciezkosci
+% trojkatow, mniejszego od epsilon.
+% 
+% Funkcja moze rysowac zarowno wykres funkcji interpolujacej,
+% interpolowanej, dwa jednoczesnie, oraz wykres bledu.
+%
+% Funkcja opcjonalnie wypisuje informacje diagnostyczne w konsoli.
+%
+% Wejscie:
+% f - funkcja interpolowana (f: RxR -> R)
+% (x0, y0) - lewy dolny wierzcholek kwadratu, na ktorym ma sie odbyc
+% interpolacja
+% H - dlugosc boku kwadratu do interpolacji
+% n - startowa ilosc parametru sluzacego do podzialu kwadratu
+% epsilon - maksymalna zadana wartosc bledu sredniokwadratowego
+% log - parametr zezwalajacy na wypisanie informacji diagnostycznych (1 -
+% wypisz, 0 - nie wypisuj)
+% displayType - parametr okreslajacy rodzaj wykresu:
+% * 0 - brak wykresu (tylko wypisz wiadomosci kontrolne, o ile zezwolone)
+% * 1 - tylko funkcja interpolowana f
+% * 2 - tylko funkcja interpolujaca p
+% * 3 - obie funkcje (f oraz p)
+% * 4 - wykres bledu (f - p)
+% 
+% Autor: Grzegorz Rozdzialik (D4, gr. lab. 2)
+
 
 function interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType)
 if nargin < 7

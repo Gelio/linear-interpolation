@@ -1,7 +1,28 @@
-% squarePart:
-%   1 - lewy górny trójk¹t
-%   2 - prawy dolny trójk¹t
-function [ row, column, squarePart ] = getTriangleByCoordinates(x0, y0, H, n, x, y)
+% [row, column, squarePart] = getTriangleByCoordinates(x0, y0, H, n, x, y)
+% - funkcja sprawdzajaca do jakiego trojkata nalezy punkt (x, y) i
+% zwracajaca jego indeksy (uzyteczne do odwolywania sie do tablicy
+% coefficients).
+%
+% Wejscie:
+% (x0, y0) - wspolrzedne lewego dolnego wierzcholka kwadratu, na ktorym
+% odbywa sie interpolacja
+% H - dlugosc boku kwadratu, na ktorym odbywa sie interpolacja
+% n - parametr okreslajacy ilosc podzialow kwadratu (2n^2 trojkatow)
+% (x, y) - wspolrzedne zadanego punktu, dla ktorego chcemy obliczyc indeksy
+% trojkata
+%
+% Wyjscie:
+% row - wiersz, w ktorym znajduje sie trojkat dla punktu (x, y)
+% column - kolumna, w ktorej znajduje sie trojkat dla punktu (x, y)
+% squarePart - polowa kwadratu, w ktorej znajduje sie trojkat dla punktu
+% (x, y):
+% *  1 - lewa gorna polowa
+% *  2 - prawa dolna polowa
+%
+% Autor: Grzegorz Rozdzialik (D4, gr. lab. 2)
+
+
+function [row, column, squarePart] = getTriangleByCoordinates(x0, y0, H, n, x, y)
 
 if (x < x0) || (x > x0+H)
     error('x coordinate out of bounds');
