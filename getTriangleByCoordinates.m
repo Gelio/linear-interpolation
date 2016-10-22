@@ -9,10 +9,11 @@ elseif (y < y0) || (y > y0+H)
     error('y coordinate out of bounds');
 end
 
-row = floor((y - y0) / n);
-column = floor((x - x0) / n);
-
 h = H / n;
+
+row = floor((y - y0) / h);
+column = floor((x - x0) / h);
+
 singleSquareX0 = x0 + column*h;
 singleSquareY0 = y0 + row*h;
 
@@ -23,5 +24,16 @@ else
     squarePart = 2;
 end
 
+% Poniewaz indeksowanie jest od 1 nalezy zmienic row i column
+row = row + 1;
+column = column + 1;
+
+% Sprawdzenie czy aktualne polozenie nie jest na skraju kwadratu
+if x == x0+H
+    column = column - 1;
+end
+if y == y0+H
+    row = row - 1;
+end
 end
 
