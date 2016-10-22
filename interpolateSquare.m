@@ -1,6 +1,20 @@
-function interpolateSquare(f, x0, y0, H, n, epsilon, log)
-if nargin == 6
+% displayType:
+% * 0 - none
+% * 1 - only exact values
+% * 2 - only interpolated values
+% * 3 - exact and interpolated values
+% * 4 - error
+
+function interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType)
+if nargin < 7
     log = 0;
+end
+if nargin < 8
+    displayType = 3;
+end
+
+if displayType == 0
+    return;
 end
 
 errorConditionMet = 0;
@@ -30,7 +44,7 @@ if log == 1
     fprintf('Podzial trwal %f ms\n', divisionTime*1000);
     fprintf('Obliczanie ostatecznych wspolczynnikow dla funkcji interpolujacych trwalo %f ms\n', coefficientsCalculatingTime*1000);
     fprintf('Sprawdzanie ostatecznego bledu interpolacji trwalo %f ms\n', interpolationErrorCalculatingTime*1000);
-    fprintf('Osiagnieto blad interpolacji %g (zadano %g)\n', interpolationError, epsilon);
+    fprintf('Osiagnieto blad interpolacji rowny %g (zadano %g)\n', interpolationError, epsilon);
 end
 
 % Tworzenie wykresu
@@ -57,15 +71,36 @@ end
 
 
 figure;
+% Stworzenie wykresu i legendy
 % Powierzchnia dokladnych wartosci
-surf(x, y, exactValues, ones(length(x)));
+if displayType == 1 || displayType == 3
+    surf(x, y, exactValues, ones(length(x)));
+    hold on;
+    legend('Funkcja dokladna');
+end
 
 % Powierzchnia wartosci interpolowanych
-hold on;
-surf(x, y, interpolatedValues, ones(length(x)) + 2);
+if displayType == 2 || displayType == 3
+    surf(x, y, interpolatedValues, ones(length(x)) + 1);
+    hold on;
+    legend('Funkcja interpolujaca');
+end
 
-% Opis wykresu i osi
-legend('Funkcja dokladna', 'Funkcja interpolujaca');
+if displayType == 3
+    legend('Funkcja dokladna', 'Funkcja interpolujaca');
+end
+
+% Powierzchnia bledu
+if displayType == 4
+    surf(x, y, exactValues - interpolatedValues, ones(length(x)) + 2);
+    hold on;
+    legend('Blad (funkcja dokladna - interpolujaca)');
+end
+
+% Opis wykresu
+title('Interpolacja liniowa');
+
+% Opis osi
 xlabel('os x');
 ylabel('os y');
 zlabel('os z = f(x, y)');
@@ -78,6 +113,9 @@ yMax = y0 + 9/8*H;
 axis vis3d;
 xlim([xMin xMax]);
 ylim([yMin yMax]);
+
+% Dodanie skali kolorow
+colorbar;
 
 
 end
