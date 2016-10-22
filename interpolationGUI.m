@@ -209,9 +209,10 @@ interpolatedFunctionIndex = get(handles.interpolatedFunctionSelect, 'Value');
 displayType = get(handles.displayTypeSelect, 'Value');
 
 availableFunctions = {
-    @(x, y)(x^2 + y^2);
+    @(x, y)(x^2 + y^2)
     @(x, y)(x + y)
     @(x, y)(x^3 + y^3)
+    @(x, y)(sin(x) + cos(y))
     };
 
 interpolateSquare(availableFunctions{interpolatedFunctionIndex}, x0, y0, H, 1, epsilon, logDebugInfo, displayType);
