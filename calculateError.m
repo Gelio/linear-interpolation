@@ -9,9 +9,9 @@ totalError = 0;
 for i=1:n
     for j=1:n
         % Obliczenie wspolrzednych kwadratu zawierajacego dwa trojk¹ty
-        topLeftX = x0 + j*h;
-        topLeftY = y0 - i*h;
-        [gravityCenter1, gravityCenter2] = getTrianglesGravityCenter(topLeftX, topLeftY, h);
+        bottomLeftX = x0 + j*h;
+        bottomLeftY = y0 - i*h;
+        [gravityCenter1, gravityCenter2] = getTrianglesGravityCenter(bottomLeftX, bottomLeftY, h);
         
         % Lewy gorny trojkat
         exactValue = f(gravityCenter1(1), gravityCenter1(2));
