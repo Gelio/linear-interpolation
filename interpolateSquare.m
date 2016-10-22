@@ -1,5 +1,5 @@
 % displayType:
-% * 0 - none
+% * 0 - none (only log)
 % * 1 - only exact values
 % * 2 - only interpolated values
 % * 3 - exact and interpolated values
@@ -11,10 +11,6 @@ if nargin < 7
 end
 if nargin < 8
     displayType = 3;
-end
-
-if displayType == 0
-    return;
 end
 
 errorConditionMet = 0;
@@ -70,7 +66,9 @@ if log == 1
 end
 
 
-figure;
+if displayType ~= 0
+    figure;
+end
 % Stworzenie wykresu i legendy
 % Powierzchnia dokladnych wartosci
 if displayType == 1 || displayType == 3
@@ -87,7 +85,7 @@ if displayType == 2 || displayType == 3
 end
 
 if displayType == 3
-    legend('Funkcja dokladna', 'Funkcja interpolujaca');
+    legend('Funkcja dokladna', 'Funkcja interpolujaca', 'Location', 'Best');
 end
 
 % Powierzchnia bledu
@@ -103,7 +101,7 @@ title('Interpolacja liniowa');
 % Opis osi
 xlabel('os x');
 ylabel('os y');
-zlabel('os z = f(x, y)');
+zlabel('os z (wartosc funkcji)');
 
 % Skalowanie osi
 xMin = x0 - H/8;
@@ -113,9 +111,6 @@ yMax = y0 + 9/8*H;
 axis vis3d;
 xlim([xMin xMax]);
 ylim([yMin yMax]);
-
-% Dodanie skali kolorow
-colorbar;
 
 
 end
