@@ -22,7 +22,7 @@ function varargout = interpolationGUI(varargin)
 
 % Edit the above text to modify the response to help interpolationGUI
 
-% Last Modified by GUIDE v2.5 22-Oct-2016 13:12:34
+% Last Modified by GUIDE v2.5 23-Oct-2016 19:28:19
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -207,6 +207,7 @@ epsilon = str2double(get(handles.epsilonEdit, 'String'));
 logDebugInfo = get(handles.logDebugInfoCheckbox, 'Value');
 interpolatedFunctionIndex = get(handles.interpolatedFunctionSelect, 'Value');
 displayType = get(handles.displayTypeSelect, 'Value');
+plotStepSelectValue = get(handles.plotStepSelect, 'Value');
 
 availableFunctions = {
     @(x, y)(x^2 + y^2)
@@ -215,7 +216,17 @@ availableFunctions = {
     @(x, y)(sin(x) + cos(y))
     };
 
-interpolateSquare(availableFunctions{interpolatedFunctionIndex}, x0, y0, H, 1, epsilon, logDebugInfo, displayType);
+availableSteps = [
+    100
+    10
+    1
+    0.1
+    0.01
+    0.001
+    ];
+plotStep = availableSteps(plotStepSelectValue);
+
+interpolateSquare(availableFunctions{interpolatedFunctionIndex}, x0, y0, H, 1, epsilon, logDebugInfo, displayType, plotStep);
 
 
 
@@ -235,6 +246,29 @@ function epsilonEdit_CreateFcn(hObject, eventdata, handles)
 % handles    empty - handles not created until after all CreateFcns called
 
 % Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in plotStepSelect.
+function plotStepSelect_Callback(hObject, eventdata, handles)
+% hObject    handle to plotStepSelect (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns plotStepSelect contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from plotStepSelect
+
+
+% --- Executes during object creation, after setting all properties.
+function plotStepSelect_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to plotStepSelect (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');

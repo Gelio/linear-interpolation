@@ -1,9 +1,9 @@
-% interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType) - funkcja
-% tworzaca w nowym oknie wykres dla interpolacji funkcji f na kwadracie o
-% boku H, ktorego lewym dolnym wierzcholkiem jest punkt (x0, y0), dzielac
-% go na 2n^2 trojkatow przystajacych. Podzial kwadratu jest zageszczany, az
-% do osiagniecia bledu sredniokwadratowego, mierzonego w srodkach ciezkosci
-% trojkatow, mniejszego od epsilon.
+% interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType, plotStep) -
+% funkcja tworzaca w nowym oknie wykres dla interpolacji funkcji f na
+% kwadracie o boku H, ktorego lewym dolnym wierzcholkiem jest punkt
+% (x0, y0), dzielac go na 2n^2 trojkatow przystajacych. Podzial kwadratu
+% jest zageszczany, az do osiagniecia bledu sredniokwadratowego, mierzonego
+% w srodkach ciezkosci trojkatow, mniejszego od epsilon.
 % 
 % Funkcja moze rysowac zarowno wykres funkcji interpolujacej,
 % interpolowanej, dwa jednoczesnie, oraz wykres bledu.
@@ -25,16 +25,21 @@
 % * 2 - tylko funkcja interpolujaca p
 % * 3 - obie funkcje (f oraz p)
 % * 4 - wykres bledu (f - p)
+% plotStep - odstep miedzy punktami na wykresie (o ile displayType jest
+% rozny od 0)
 % 
 % Autor: Grzegorz Rozdzialik (D4, gr. lab. 2)
 
 
-function interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType)
+function interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType, plotStep)
 if nargin < 7
     log = 0;
 end
 if nargin < 8
     displayType = 3;
+end
+if nargin < 9
+    plotStep = 0.1;
 end
 
 errorConditionMet = 0;
@@ -68,7 +73,6 @@ if log == 1
 end
 
 % Tworzenie wykresu
-plotStep = 0.1;
 x = x0:plotStep:(x0+H);
 y = y0:plotStep:(y0+H);
 exactValues = zeros(length(x), length(y));
