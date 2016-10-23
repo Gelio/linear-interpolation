@@ -131,11 +131,11 @@
 		
 		\textbf{Wyniki}:\\
 		Osiągnięto zadaną dokładność przy $n = 3$ ($18$ trójkątów przystających).\\
-		Podział trwał $110.652634$ ms.\\
-		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $2.213548$ ms.\\
-		Sprawdzanie ostatecznego błędu interpolacji trwało $2.750721$ ms.\\
+		Podział trwał $1.006080$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $0.316587$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.025173$ ms.\\
 		Osiągnięto błąd interpolacji równy $0.0390184$ (zadano $0.1$).\\
-		Obliczanie wartości do wykresu trwało $15.206833$ ms.
+		Obliczanie wartości do wykresu trwało $0.468480$ ms.
 		
 		
 		
@@ -233,10 +233,26 @@
 	\begin{enumerate}
 		\item Wraz ze zmniejszaniem parametru $\varepsilon$ wykres funkcji interpolującej $p$ zbliża się do wykresu funkcji interpolowanej $f$ (przykłady 1, 2 oraz 3).
 		
+		Wraz ze zwiększaniem się dokładności, czas potrzebny na otrzymanie zadanej dokładności wygląda, jakby wzrastał wykładniczo.
+		
+		Zależności z tych przykładów te zostały pokazane na wykresach znajdujących się na rysunkach 3 oraz 4.
+		
+		
+		\begin{figure}
+			\centering
+			\includegraphics[]{images/wykres-n.png}
+			\caption{Wykres liczby $n$ w zależności od zadanej dokładności $\varepsilon$}
+			
+			\includegraphics[]{images/wykres-czas-dzielenia.png}
+			\caption{Wykres czasu podziału kwadratu w zależności od zadanej dokładności $\varepsilon$}
+		\end{figure}
+
 		\item Osiągnięcie dużej dokładności (poniżej $\varepsilon = 10^{-4}$) na dużym obszarze ($H \geq 10$) wymaga sporej ilości obliczeń (przykład 4).
 		
 		\item Istnieją funkcje, które szybko osiągają warunek stopu, ponieważ funkcja interpolująca osiąga wartości zbliżone do dokładnych w środkach ciężkości, natomiast znacznie inne poza nimi. Prezentujące to przykłady mają numery 5 oraz 6. W przykładzie 5-tym funkcja interpolująca $p$ w ogóle nie przypomina funkcji interpolowanej $f$, ponieważ kwadrat, na którym odbywała się interpolacja został podzielony jedynie na dwa trójkąty, dla których warunek stopu został od razu spełniony. Funkcja interpolująca z przykładu 6 dużo lepiej odwzorowuje funkcję interpolowaną.
 	\end{enumerate}
+
+	\pagebreak
 	
 	\section{Funkcja do testowania}
 	Do sprawdzenia funkcji, które nie zostały udostępnione w interfejsie graficznym należy wykorzystać funkcję $interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType)$. Ta funkcja udostępnia funkcjonalność analogiczną do interfejsu graficznego.
