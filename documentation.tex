@@ -18,42 +18,44 @@
 	Interpolacja funkcjami liniowymi na kwadracie podzielonym na $2n^2$ trójkątów przystających. Zagęszczanie podziału kwadratu, aż do osiągnięcia błędu średniokwadratowego, mierzonego w środkach ciężkości trójkątów, mniejszego od $\varepsilon$.
 	
 	\section{Opis metody}
-	Mając funkcję interpolowaną $f: D \to \mathbb{R}$, gdzie $D = \{ (x, y) \in \mathbb{R}^2: x_0 \leq x \leq x_0 + H, y_0 \leq y \leq y_0 + H\}$, $H, x_0, y_0 \in \mathbb{R}$ opisaną na kwadracie o boku $H$, którego lewy dolny wierzchołek ma współrzędne $(x_0, y_0)$, należy skonstruować funkcję sklejaną $p: D \to \mathbb{R}$ złożoną z funkcji opisanych na pojedynczych trójkątach przystających, dzielących ten kwadrat.
+	Mając funkcję interpolowaną $f: D \to \mathbb{R}$, gdzie $D = \{ (x, y) \in \mathbb{R}^2: x_0 \leq x \leq x_0 + H, y_0 \leq y \leq y_0 + H\}$, $H, x_0, y_0 \in \mathbb{R}$ opisaną na kwadracie o boku $H$, którego lewy dolny wierzchołek ma współrzędne $(x_0, y_0)$, należy skonstruować interpolującą funkcję sklejaną $p: D \to \mathbb{R}$ złożoną z funkcji opisanych na pojedynczych trójkątach przystających, dzielących ten kwadrat.
 	
-	\begin{figure}[]
+	\begin{figure}
+		\centering
 		\includegraphics[scale=0.8]{square-division.png}
-		\caption{Przedstawienie podziału dziedziny funkcji $f$}
+		\caption{Podział dziedziny funkcji $f$}
 	\end{figure}
 	
-	Dziedzinę funkcji $f$ należy podzielić na $n$ części wzdłuż osi $x$ oraz osi $y$, co daje $n^2$ kwadratów, a następnie każdy kwadrat można podzielić względem dowolnej przekątnej na dwa trójkąty. W moim rozwiązaniu użyłem przekątnej o współczynniku kierunkowym równym $1$.
+	Dziedzinę funkcji $f$ należy podzielić na $n$ części wzdłuż osi X oraz osi Y, co daje $n^2$ kwadratów, a następnie każdy kwadrat można podzielić względem dowolnej przekątnej na dwa trójkąty. W moim rozwiązaniu użyłem przekątnej o współczynniku kierunkowym równym $1$.
 	
 	\section{Implementacja metody}
 	Przyjmijmy, że punkt $(x_0, y_0) \in D$ to lewy dolny wierzchołek dziedziny. Startując z parametrem $n = 1$ należy podzielić kwadrat na $n^2$ kwadratów przystających ($n$ podziałów wzdłuż osi X, $n$ podziałów wzdłuż osi Y), a następnie podzielić każdy z nich na dwa prostokątne trójkąty przystające, których przeciwprostokątną będzie przekątna kwadratu o współczynniku kierunkowym równym $1$.
 	
 	Niech $h = \frac{H}{n}$ będzie długością boku każdego z mniejszych kwadratów.
 	
-	Rozważmy jeden z kwadratów po podziale, będący w $i$-tym rzędzie i $j$-tej kolumnie. Wtedy jego lewy dolny wierzchołek ma współrzędne $(a, b) = (x_0 + j*h, y_0 + i*h)$.
+	Rozważmy jeden z kwadratów po podziale, będący w $i$-tym rzędzie i $j$-tej kolumnie. Wtedy jego lewy dolny wierzchołek ma współrzędne $(a, b) = (x_0 + (j-1)*h, y_0 + (i-1)*h)$.
 	
 	Wierzchołki trójkąta powyżej przekątnej kwadratu mają współrzędne $(a, b)$, $(a + h, b + h)$, $(a, b + h)$, a jego środek ciężkości znajduje się w punkcie $(a + \frac{h}{3}, b + \frac{2}{3}h)$.
 	
-	Wierzchołki trójkąta poniżej przekątnej kwadratu mają współrzędne $(a, b)$, $(a + h, b)$, $(a + h, b + h)$, a jego środek ciężkości znajduje się w punkcie $(a + \frac{2}{3}*h, b + \frac{h}{3})$.
+	Wierzchołki trójkąta poniżej przekątnej kwadratu mają współrzędne $(a, b)$, $(a + h, b)$, $(a + h, b + h)$, a jego środek ciężkości znajduje się w punkcie $(a + \frac{2}{3}h, b + \frac{h}{3})$.
 	
-	Na rysunku 2 rozstał przedstawiony podział kwadratu na dwa trójkąty przystające, oraz środek ciężkości jednego z trójkątów.
+	Na rysunku 2 został przedstawiony podział kwadratu na dwa trójkąty przystające, oraz środek ciężkości jednego z trójkątów.
 	
 	\pagebreak
 	
 	\begin{figure}
+		\centering
 		\includegraphics[scale=1]{images/single-square-gravity-center.png}
 		\caption{Środek ciężkości trójkąta dzielącego kwadrat}
 	\end{figure}
 	
 	Interpolacja będzie za pomocą funkcji liniowych, więc każda z funkcji $p$ ma równanie:
-	$$p(x, y) = \alpha_0 + \alpha_1*x + \alpha_2*y$$
+	$$p(x, y) = \alpha_0 + \alpha_1 x + \alpha_2 y$$
 	gdzie $\alpha_0, \alpha_1, \alpha_2$ są współczynnikami specyficznymi dla danego trójkąta, na którym się odbywa interpolacja.
 	
 	Biorąc wierzchołki trójkątów za węzły interpolacji i korzystając z założenia, że dla węzłów interpolacji spełniony jest warunek:
 	$$p(x_i, y_i) = f(x_i, y_i)$$
-	gdzie $(x_i, y_i)$ jest węzłem interpolacji, otrzymujemy następujący układ równań:
+	gdzie $(x_i, y_i)$ są węzłami interpolacji, otrzymujemy następujący układ równań:
 	\begin{align*}
 		\left[
 			\begin{array}{ccc}
@@ -115,7 +117,7 @@
 	gdzie punkty $(x_j, y_i)$ są środkami ciężkości kolejnych trójkątów.
 	
 	\section{Poprawność metody}
-	Metoda na ogół jest poprawna, jednak podczas testów zdarzało się tak, że funkcja interpolująca $p$ nie miała odległych wartości w środkach ciężkości trójkątów, a poza nimi znacznie różniła się od funkcji interpolowanej $f$. Oznaczało to, że warunek stopu został osiągnięty po zaledwie kilku próbach ($n$ około 3), natomiast interpolacja była niedokładna.
+	Metoda na ogół jest poprawna, jednak podczas testów zdarzało się tak, że funkcja interpolująca $p$ nie miała odległych wartości w środkach ciężkości trójkątów, a poza nimi znacznie różniła się od funkcji interpolowanej $f$. Oznaczało to, że warunek stopu został osiągnięty od razu ($n = 1$), natomiast interpolacja była niedokładna (przykład 5).
 	
 	Były to jednak nieliczne przypadki. W większości metoda zachowywała się poprawnie i dawała dobre wyniki.
 	
@@ -186,7 +188,7 @@
 		\textbf{Wyniki}:\\
 		Osiągnięto zadaną dokładność przy $n = 119$ ($28322$ trójkątów przystających).\\
 		Podział trwał $17248.057768$ ms.\\
-		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $403.329582$ ms.
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $403.329582$ ms.\\
 		Sprawdzanie ostatecznego błędu interpolacji trwało $29.678268$ ms.\\
 		Osiągnięto błąd interpolacji równy $9.85025 * 10^{-6}$ (zadano $10^{-5}$).\\
 		Obliczanie wartości do wykresu trwało $8.104837$ ms.
@@ -255,14 +257,17 @@
 	\pagebreak
 	
 	\section{Funkcja do testowania}
-	Do sprawdzenia funkcji, które nie zostały udostępnione w interfejsie graficznym należy wykorzystać funkcję $interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType)$. Ta funkcja udostępnia funkcjonalność analogiczną do interfejsu graficznego.
+	Do sprawdzenia funkcji, które nie zostały udostępnione w interfejsie graficznym należy wykorzystać funkcję \textit{interpolateSquare}. Ta funkcja udostępnia funkcjonalność analogiczną do interfejsu graficznego.
 	
 	Więcej informacji dotyczących wykorzystania funkcji $interpolateSquare$ znajduje się w pliku z funkcją (\textit{interpolateSquare.m}).
 	
 	\section{Interfejs graficzny}
 	Do metody został dodany interfejs graficzny, umożliwiający wygodne testowanie metody dla różnych parametrów i różnych funkcji interpolowanych $f$. Aby go wywołać należy uruchomić komendę \textit{interpolationGUI} w MATLABie.
 	
+	Został on przedstawiony na rysunku 5-tym.
+	
 	\begin{figure}
+		\centering
 		\includegraphics[scale=1]{images/gui.png}
 		\caption{Interfejs graficzny}
 	\end{figure}
