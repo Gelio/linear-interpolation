@@ -98,14 +98,14 @@ end
 if displayType == 1 || displayType == 3
     surf(x, y, exactValues, ones(length(x)));
     hold on;
-    legend('Funkcja dokladna');
+    legend('Funkcja dokladna', 'Location', 'Best');
 end
 
 % Powierzchnia wartosci interpolowanych
 if displayType == 2 || displayType == 3
     surf(x, y, interpolatedValues, ones(length(x)) + 1);
     hold on;
-    legend('Funkcja interpolujaca');
+    legend('Funkcja interpolujaca', 'Location', 'Best');
 end
 
 if displayType == 3
@@ -116,7 +116,7 @@ end
 if displayType == 4
     surf(x, y, exactValues - interpolatedValues, ones(length(x)) + 2);
     hold on;
-    legend('Blad (funkcja dokladna - interpolujaca)');
+    legend('Blad (funkcja dokladna - interpolujaca)', 'Location', 'Best');
 end
 
 % Opis wykresu
