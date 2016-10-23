@@ -38,6 +38,15 @@
 	
 	Wierzchołki trójkąta poniżej przekątnej kwadratu mają współrzędne $(a, b)$, $(a + h, b)$, $(a + h, b + h)$, a jego środek ciężkości znajduje się w punkcie $(a + \frac{2}{3}*h, b + \frac{h}{3})$.
 	
+	Na rysunku 2 rozstał przedstawiony podział kwadratu na dwa trójkąty przystające, oraz środek ciężkości jednego z trójkątów.
+	
+	\pagebreak
+	
+	\begin{figure}
+		\includegraphics[scale=1]{images/single-square-gravity-center.png}
+		\caption{Środek ciężkości trójkąta dzielącego kwadrat}
+	\end{figure}
+	
 	Interpolacja będzie za pomocą funkcji liniowych, więc każda z funkcji $p$ ma równanie:
 	$$p(x, y) = \alpha_0 + \alpha_1*x + \alpha_2*y$$
 	gdzie $\alpha_0, \alpha_1, \alpha_2$ są współczynnikami specyficznymi dla danego trójkąta, na którym się odbywa interpolacja.
@@ -111,12 +120,61 @@
 	Były to jednak nieliczne przypadki. W większości metoda zachowywała się poprawnie i dawała dobre wyniki.
 	
 	\section{Przykłady}
-	Uzupełnić.
-	
 	\begin{enumerate}[label=\textbf{Przykład \arabic*}]
 		\item
+		Funkcja $f(x, y) = x^2 + y^2$.\\
+		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
+		Długość boku kwadratu: $2$.\\
+		$\varepsilon = 0.1$
+		
+		\includegraphics[]{images/example-1.png}
+		
+		\textbf{Wyniki}:\\
+		Osiągnięto zadaną dokładność przy $n = 3$ ($18$ trójkątów przystających).\\
+		Podział trwał $110.652634$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $2.213548$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $2.750721$ ms.\\
+		Osiągnięto błąd interpolacji równy $0.0390184$ (zadano $0.1$).\\
+		Obliczanie wartości do wykresu trwało $15.206833$ ms.
+		
+		
+		
 		\item
+		Funkcja $f(x, y) = x^2 + y^2$.\\
+		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
+		Długość boku kwadratu: $2$.\\
+		$\varepsilon = 0.01$
+		
+		\includegraphics[]{images/example-2.png}
+		
+		\textbf{Wyniki}:\\
+		Osiągnięto zadaną dokładność przy $n = 5$ ($50$ trójkątów przystających).\\
+		Podział trwał $5.291949$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $1.093547$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.121600$ ms.\\
+		Osiągnięto błąd interpolacji równy $0.00505679$ (zadano $0.01$).\\
+		Obliczanie wartości do wykresu trwało $0.713387$ ms.
+		
+		
+		
 		\item
+		Funkcja $f(x, y) = x^2 + y^2$.\\
+		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
+		Długość boku kwadratu: $2$.\\
+		$\varepsilon = 10^{-5}$
+		
+		\includegraphics[]{images/example-3.png}
+		
+		\textbf{Wyniki}:\\
+		Osiągnięto zadaną dokładność przy $n = 24$ ($1152$ trójkątów przystających).\\
+		Podział trwał $187.255973$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $23.461557$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $1.129387$ ms.\\
+		Osiągnięto błąd interpolacji równy $9.52599e-06$ (zadano $1e-05$).\\
+		Obliczanie wartości do wykresu trwało $0.538027$ ms.
+		
+		
+		
 		\item
 		Funkcja $f(x, y) = x^2 + y^2$.\\
 		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
@@ -125,7 +183,7 @@
 		
 		\includegraphics[]{images/example-4.png}
 		
-		Wyniki:\\
+		\textbf{Wyniki}:\\
 		Osiągnięto zadaną dokładność przy $n = 119$ ($28322$ trójkątów przystających).\\
 		Podział trwał $17248.057768$ ms.\\
 		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $403.329582$ ms.
@@ -133,18 +191,71 @@
 		Osiągnięto błąd interpolacji równy $9.85025 * 10^{-6}$ (zadano $10^{-5}$).\\
 		Obliczanie wartości do wykresu trwało $8.104837$ ms.
 		
+		
+		
+		\item
+		Funkcja: $f(x, y) = \sin x + \cos y$.\\
+		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
+		Długość boku kwadratu: $10$.\\
+		$\varepsilon = 0.1$
+		
+		\includegraphics[]{images/example-5.png}
+		
+		\textbf{Wyniki}:\\
+		Osiągnięto zadaną dokładność przy $n = 1$ ($2$ trójkąty przystające).\\
+		Podział trwał $0.212907$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $0.145067$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.023893$ ms.\\
+		Osiągnięto błąd interpolacji równy $0.0224202$ (zadano $0.1$).\\
+		Obliczanie wartości do wykresu trwało $9.846618$ ms.
+		
+		
+		\item
+		Funkcja: $f(x, y) = \sin x + \cos y$.\\
+		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
+		Długość boku kwadratu: $10$.\\
+		$\varepsilon = 0.01$
+		
+		\includegraphics[]{images/example-6.png}
+		
+		\textbf{Wyniki}:\\
+		Osiągnięto zadaną dokładność przy $n = 11$ ($242$ trójkątów przystających).\\
+		Podział trwał $22.700810$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $4.952749$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.351147$ ms.\\
+		Osiągnięto błąd interpolacji równy $0.00791773$ (zadano $0.01$).\\
+		Obliczanie wartości do wykresu trwało $11.321605$ ms.
+		
+		
 	\end{enumerate}
 	
 	\section{Wnioski}
 	\begin{enumerate}
-		\item Istnieją funkcje, które szybko osiągają warunek stopu, ponieważ funkcja interpolująca osiąga wartości zbliżone do dokładnych w środkach ciężkości, natomiast znacznie inne poza nimi.
-		\item Osiągnięcie dużej dokładności (poniżej $\varepsilon = 10^{-4}$) na dużym obszarze ($H \geq 10$) wymaga sporej ilości obliczeń (przykład 4)
+		\item Wraz ze zmniejszaniem parametru $\varepsilon$ wykres funkcji interpolującej $p$ zbliża się do wykresu funkcji interpolowanej $f$ (przykłady 1, 2 oraz 3).
+		
+		\item Osiągnięcie dużej dokładności (poniżej $\varepsilon = 10^{-4}$) na dużym obszarze ($H \geq 10$) wymaga sporej ilości obliczeń (przykład 4).
+		
+		\item Istnieją funkcje, które szybko osiągają warunek stopu, ponieważ funkcja interpolująca osiąga wartości zbliżone do dokładnych w środkach ciężkości, natomiast znacznie inne poza nimi. Prezentujące to przykłady mają numery 5 oraz 6. W przykładzie 5-tym funkcja interpolująca $p$ w ogóle nie przypomina funkcji interpolowanej $f$, ponieważ kwadrat, na którym odbywała się interpolacja został podzielony jedynie na dwa trójkąty, dla których warunek stopu został od razu spełniony. Funkcja interpolująca z przykładu 6 dużo lepiej odwzorowuje funkcję interpolowaną.
 	\end{enumerate}
 	
 	\section{Funkcja do testowania}
+	Do sprawdzenia funkcji, które nie zostały udostępnione w interfejsie graficznym należy wykorzystać funkcję $interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType)$. Ta funkcja udostępnia funkcjonalność analogiczną do interfejsu graficznego.
+	
+	Więcej informacji dotyczących wykorzystania funkcji $interpolateSquare$ znajduje się w pliku z funkcją (\textit{interpolateSquare.m}).
 	
 	\section{Interfejs graficzny}
+	Do metody został dodany interfejs graficzny, umożliwiający wygodne testowanie metody dla różnych parametrów i różnych funkcji interpolowanych $f$. Aby go wywołać należy uruchomić komendę \textit{interpolationGUI} w MATLABie.
+	
+	\begin{figure}
+		\includegraphics[scale=1]{images/gui.png}
+		\caption{Interfejs graficzny}
+	\end{figure}
 	
 	\section{Bibliografia}
+	\begin{enumerate}
+		\item Książka (dopisać)
+		\item Informacje z wykładu
+		\item Dopisać wikipedię albo coś takiego
+	\end{enumerate}
 	
 \end{document}
