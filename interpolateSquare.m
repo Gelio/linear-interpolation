@@ -65,11 +65,11 @@ divisionTime = toc(divisionStart);
 
 % Dokladnosc spelniona, wypisanie informacji diagnostycznych
 if log == 1
-    fprintf('Osiagnieto zadana dokladnosc przy n = %d (%d trojkatow przystajacych)\n', n, 2*n^2);
-    fprintf('Podzial trwal %f ms\n', divisionTime*1000);
-    fprintf('Obliczanie ostatecznych wspolczynnikow dla funkcji interpolujacych trwalo %f ms\n', coefficientsCalculatingTime*1000);
-    fprintf('Sprawdzanie ostatecznego bledu interpolacji trwalo %f ms\n', interpolationErrorCalculatingTime*1000);
-    fprintf('Osiagnieto blad interpolacji rowny %g (zadano %g)\n', interpolationError, epsilon);
+    fprintf('Osiagnieto zadana dokladnosc przy n = %d (%d trojkatow przystajacych).\n', n, 2*n^2);
+    fprintf('Podzial trwal %f ms.\n', divisionTime*1000);
+    fprintf('Obliczanie ostatecznych wspolczynnikow dla funkcji interpolujacych trwalo %f ms.\n', coefficientsCalculatingTime*1000);
+    fprintf('Sprawdzanie ostatecznego bledu interpolacji trwalo %f ms.\n', interpolationErrorCalculatingTime*1000);
+    fprintf('Osiagnieto blad interpolacji rowny %g (zadano %g).\n', interpolationError, epsilon);
 end
 
 % Tworzenie wykresu
@@ -91,7 +91,7 @@ for i=1:length(y)
 end
 valuesCalculatingTime = toc;
 if log == 1
-    fprintf('Obliczanie wartosci do wykresu trwalo %f ms\n\n', valuesCalculatingTime*1000);
+    fprintf('Obliczanie wartosci do wykresu trwalo %f ms.\n\n', valuesCalculatingTime*1000);
 end
 
 
@@ -103,25 +103,25 @@ end
 if displayType == 1 || displayType == 3
     surf(x, y, exactValues, ones(length(x)));
     hold on;
-    legend('Funkcja dokladna', 'Location', 'Best');
+    legend('Funkcja dokladna f', 'Location', 'Best');
 end
 
 % Powierzchnia wartosci interpolowanych
 if displayType == 2 || displayType == 3
     surf(x, y, interpolatedValues, ones(length(x)) + 1);
     hold on;
-    legend('Funkcja interpolujaca', 'Location', 'Best');
+    legend('Funkcja interpolujaca p', 'Location', 'Best');
 end
 
 if displayType == 3
-    legend('Funkcja dokladna', 'Funkcja interpolujaca', 'Location', 'Best');
+    legend('Funkcja dokladna f', 'Funkcja interpolujaca p', 'Location', 'Best');
 end
 
 % Powierzchnia bledu
 if displayType == 4
     surf(x, y, exactValues - interpolatedValues, ones(length(x)) + 2);
     hold on;
-    legend('Blad (funkcja dokladna - interpolujaca)', 'Location', 'Best');
+    legend('Blad (funkcja dokladna f - interpolujaca p)', 'Location', 'Best');
 end
 
 % Opis wykresu
