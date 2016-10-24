@@ -214,6 +214,10 @@ availableFunctions = {
     @(x, y)(x + y)
     @(x, y)(x^3 + y^3)
     @(x, y)(sin(x) + cos(y))
+    @(x, y)(x^2 - y^2)
+    @(x, y)(x - y)
+    @(x, y)(x^3 - y^2)
+    @(x, y)(log(x) + log(y))
     };
 
 availableSteps = [
