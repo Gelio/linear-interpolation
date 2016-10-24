@@ -22,7 +22,7 @@ function varargout = interpolationGUI(varargin)
 
 % Edit the above text to modify the response to help interpolationGUI
 
-% Last Modified by GUIDE v2.5 23-Oct-2016 19:28:19
+% Last Modified by GUIDE v2.5 24-Oct-2016 19:15:52
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -207,7 +207,7 @@ epsilon = str2double(get(handles.epsilonEdit, 'String'));
 logDebugInfo = get(handles.logDebugInfoCheckbox, 'Value');
 interpolatedFunctionIndex = get(handles.interpolatedFunctionSelect, 'Value');
 displayType = get(handles.displayTypeSelect, 'Value');
-plotStepSelectValue = get(handles.plotStepSelect, 'Value');
+plotPointDensityValue = get(handles.plotPointDensitySelect, 'Value');
 
 availableFunctions = {
     @(x, y)(x^2 + y^2)
@@ -220,17 +220,23 @@ availableFunctions = {
     @(x, y)(log(x) + log(y))
     };
 
-availableSteps = [
-    100
+availablePlotPointDensities = [
+    5
     10
-    1
-    0.1
-    0.01
-    0.001
+    20
+    30
+    40
+    50
+    100
+    200
+    500
+    1000
+    2000
+    5000
     ];
-plotStep = availableSteps(plotStepSelectValue);
+plotPointDensity = availablePlotPointDensities(plotPointDensityValue);
 
-interpolateSquare(availableFunctions{interpolatedFunctionIndex}, x0, y0, H, 1, epsilon, logDebugInfo, displayType, plotStep);
+interpolateSquare(availableFunctions{interpolatedFunctionIndex}, x0, y0, H, 1, epsilon, logDebugInfo, displayType, plotPointDensity);
 
 
 
@@ -256,19 +262,19 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on selection change in plotStepSelect.
-function plotStepSelect_Callback(hObject, eventdata, handles)
-% hObject    handle to plotStepSelect (see GCBO)
+% --- Executes on selection change in plotPointDensitySelect.
+function plotPointDensitySelect_Callback(hObject, eventdata, handles)
+% hObject    handle to plotPointDensitySelect (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: contents = cellstr(get(hObject,'String')) returns plotStepSelect contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from plotStepSelect
+% Hints: contents = cellstr(get(hObject,'String')) returns plotPointDensitySelect contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from plotPointDensitySelect
 
 
 % --- Executes during object creation, after setting all properties.
-function plotStepSelect_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to plotStepSelect (see GCBO)
+function plotPointDensitySelect_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to plotPointDensitySelect (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 

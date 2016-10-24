@@ -25,13 +25,13 @@
 % * 2 - tylko funkcja interpolujaca p
 % * 3 - obie funkcje (f oraz p)
 % * 4 - wykres bledu (f - p)
-% plotStep - odstep miedzy punktami na wykresie (o ile displayType jest
-% rozny od 0)
+% plotPointDensity - na ile punktow zostanie podzielona kazda z osi
+% kwadratu w celu do stworzenia wykresu (o ile displayType > 0)
 % 
 % Autor: Grzegorz Rozdzialik (D4, gr. lab. 2)
 
 
-function interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType, plotStep)
+function interpolateSquare(f, x0, y0, H, n, epsilon, log, displayType, plotPointDensity)
 if nargin < 7
     log = 0;
 end
@@ -39,7 +39,7 @@ if nargin < 8
     displayType = 3;
 end
 if nargin < 9
-    plotStep = 0.1;
+    plotPointDensity = 100;
 end
 
 errorConditionMet = 0;
@@ -73,8 +73,9 @@ if log == 1
 end
 
 % Tworzenie wykresu
-x = x0:plotStep:(x0+H);
-y = y0:plotStep:(y0+H);
+plotPointDivision = linspace(0, H, plotPointDensity);
+x = x0 + plotPointDivision;
+y = y0 + plotPointDivision;
 exactValues = zeros(length(x), length(y));
 interpolatedValues = zeros(length(x), length(y));
 
