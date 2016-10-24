@@ -33,7 +33,7 @@
 	
 	Niech $h = \frac{H}{n}$ będzie długością boku każdego z mniejszych kwadratów.
 	
-	Rozważmy jeden z kwadratów po podziale, będący w $i$-tym rzędzie i $j$-tej kolumnie. Wtedy jego lewy dolny wierzchołek ma współrzędne $(a, b) = (x_0 + (j-1)*h, y_0 + (i-1)*h)$.
+	Rozważmy jeden z kwadratów po podziale, będący w $i$-tym rzędzie i $j$-tej kolumnie. Wtedy jego lewy dolny wierzchołek ma współrzędne $(a, b) = (x_0 + (j-1)h, y_0 + (i-1)h)$.
 	
 	Wierzchołki trójkąta powyżej przekątnej kwadratu mają współrzędne $(a, b)$, $(a + h, b + h)$, $(a, b + h)$, a jego środek ciężkości znajduje się w punkcie $(a + \frac{h}{3}, b + \frac{2}{3}h)$.
 	
@@ -117,144 +117,149 @@
 	gdzie punkty $(x_j, y_i)$ są środkami ciężkości kolejnych trójkątów.
 	
 	\section{Poprawność metody}
-	Metoda na ogół jest poprawna, jednak podczas testów zdarzało się tak, że funkcja interpolująca $p$ nie miała odległych wartości w środkach ciężkości trójkątów, a poza nimi znacznie różniła się od funkcji interpolowanej $f$. Oznaczało to, że warunek stopu został osiągnięty od razu ($n = 1$), natomiast interpolacja była niedokładna (przykład 5).
+	Metoda ta jest w ogólnym przypadku dość dokładna i spełnia założenia interpolacji (wartości w węzłach funkcji $p$ równe wartościom funkcji $f$).
 	
-	Były to jednak nieliczne przypadki. W większości metoda zachowywała się poprawnie i dawała dobre wyniki.
+	Mogą zdarzyć się przypadki funkcji, których wartości w środkach ciężkości trójkątów od razu będą bliskie wartościom dokładnym, przez co interpolacja się zakończy po pierwszym podziale, ale jest to wtedy wina warunku stopu, a nie samej metody. Niestety nie udało mi się znaleźć przykładu, który by to zobrazował.
 	
 	\section{Przykłady}
 	\begin{enumerate}[label=\textbf{Przykład \arabic*}]
 		\item
-		Funkcja $f(x, y) = x^2 + y^2$.\\
+		Funkcja $f(x, y) = \sin{x} + \cos{y}$.\\
 		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
 		Długość boku kwadratu: $2$.\\
-		$\varepsilon = 0.1$
+		$\varepsilon = 10$
 		
 		\includegraphics[]{images/example-1.png}
 		
 		\textbf{Wyniki}:\\
-		Osiągnięto zadaną dokładność przy $n = 3$ ($18$ trójkątów przystających).\\
-		Podział trwał $1.006080$ ms.\\
-		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $0.316587$ ms.\\
-		Sprawdzanie ostatecznego błędu interpolacji trwało $0.025173$ ms.\\
-		Osiągnięto błąd interpolacji równy $0.0390184$ (zadano $0.1$).\\
-		Obliczanie wartości do wykresu trwało $0.468480$ ms.
-		
+		Osiągnięto zadaną dokładność przy $n = 1$ ($2$ trójkątów przystających).\\
+		Podział trwał $0.290355$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $0.155429$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.061506$ ms.\\
+		Osiągnięto błąd interpolacji równy $1.52815$ (zadano $10$).\\
+		Obliczanie wartości do wykresu trwało $2.520103$ ms.
+		\pagebreak
 		
 		
 		\item
-		Funkcja $f(x, y) = x^2 + y^2$.\\
+		Funkcja $f(x, y) = \sin{x} + \cos{y}$.\\
 		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
 		Długość boku kwadratu: $2$.\\
-		$\varepsilon = 0.01$
+		$\varepsilon = 1$
 		
 		\includegraphics[]{images/example-2.png}
 		
 		\textbf{Wyniki}:\\
-		Osiągnięto zadaną dokładność przy $n = 5$ ($50$ trójkątów przystających).\\
-		Podział trwał $5.291949$ ms.\\
-		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $1.093547$ ms.\\
-		Sprawdzanie ostatecznego błędu interpolacji trwało $0.121600$ ms.\\
-		Osiągnięto błąd interpolacji równy $0.00505679$ (zadano $0.01$).\\
-		Obliczanie wartości do wykresu trwało $0.713387$ ms.
-		
+		Osiągnięto zadaną dokładność przy $n = 2$ ($8$ trójkątów przystających).\\
+		Podział trwał $2.069056$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $0.305593$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.181749$ ms.\\
+		Osiągnięto błąd interpolacji równy $0.199071$ (zadano $1$).\\
+		Obliczanie wartości do wykresu trwało $1.307705$ ms.
+		\pagebreak
 		
 		
 		\item
-		Funkcja $f(x, y) = x^2 + y^2$.\\
+		Funkcja $f(x, y) = \sin{x} + \cos{y}$.\\
 		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
 		Długość boku kwadratu: $2$.\\
-		$\varepsilon = 10^{-5}$
+		$\varepsilon = 0.1$
 		
 		\includegraphics[]{images/example-3.png}
 		
 		\textbf{Wyniki}:\\
-		Osiągnięto zadaną dokładność przy $n = 24$ ($1152$ trójkątów przystających).\\
-		Podział trwał $187.255973$ ms.\\
-		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $23.461557$ ms.\\
-		Sprawdzanie ostatecznego błędu interpolacji trwało $1.129387$ ms.\\
-		Osiągnięto błąd interpolacji równy $9.52599e-06$ (zadano $1e-05$).\\
-		Obliczanie wartości do wykresu trwało $0.538027$ ms.
+		Osiągnięto zadaną dokładność przy $n = 3$ ($18$ trójkątów przystających).\\
+		Podział trwał $0.530563$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $0.215273$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.025766$ ms.\\
+		Osiągnięto błąd interpolacji równy $0.0446367$ (zadano $0.1$).\\
+		Obliczanie wartości do wykresu trwało $0.212779$ ms.
+		\pagebreak
 		
 		
 		
 		\item
-		Funkcja $f(x, y) = x^2 + y^2$.\\
+		Funkcja $f(x, y) = \sin{x} + \cos{y}$.\\
 		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
 		Długość boku kwadratu: $10$.\\
-		$\varepsilon = 10^{-5}$
+		$\varepsilon = 0.1$
 		
 		\includegraphics[]{images/example-4.png}
 		
 		\textbf{Wyniki}:\\
-		Osiągnięto zadaną dokładność przy $n = 119$ ($28322$ trójkątów przystających).\\
-		Podział trwał $17248.057768$ ms.\\
-		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $403.329582$ ms.\\
-		Sprawdzanie ostatecznego błędu interpolacji trwało $29.678268$ ms.\\
-		Osiągnięto błąd interpolacji równy $9.85025 * 10^{-6}$ (zadano $10^{-5}$).\\
-		Obliczanie wartości do wykresu trwało $8.104837$ ms.
+		Osiągnięto zadaną dokładność przy $n = 12$ ($288$ trójkątów przystających).\\
+		Podział trwał $14.155078$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $2.846198$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.210563$ ms.\\
+		Osiągnięto błąd interpolacji równy $0.0778761$ (zadano $0.1$).\\
+		Obliczanie wartości do wykresu trwało $0.280104$ ms.
+		\pagebreak
 		
 		
 		
 		\item
-		Funkcja: $f(x, y) = \sin x + \cos y$.\\
+		Funkcja: $f(x, y) = x^2 + y^2$.\\
 		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
-		Długość boku kwadratu: $10$.\\
+		Długość boku kwadratu: $2$.\\
 		$\varepsilon = 0.1$
 		
 		\includegraphics[]{images/example-5.png}
 		
 		\textbf{Wyniki}:\\
-		Osiągnięto zadaną dokładność przy $n = 1$ ($2$ trójkąty przystające).\\
-		Podział trwał $0.212907$ ms.\\
-		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $0.145067$ ms.\\
-		Sprawdzanie ostatecznego błędu interpolacji trwało $0.023893$ ms.\\
-		Osiągnięto błąd interpolacji równy $0.0224202$ (zadano $0.1$).\\
-		Obliczanie wartości do wykresu trwało $9.846618$ ms.
+		Osiągnięto zadaną dokładność przy $n = 5$ ($50$ trójkątów przystających).\\
+		Podział trwał $1.406614$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $0.547463$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.037957$ ms.\\
+		Osiągnięto błąd interpolacji równy $0.0619457$ (zadano $0.1$).\\
+		Obliczanie wartości do wykresu trwało $0.243809$ ms.
+		\pagebreak
 		
 		
 		\item
-		Funkcja: $f(x, y) = \sin x + \cos y$.\\
+		Funkcja: $f(x, y) = x^3 - y^2$.\\
 		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
-		Długość boku kwadratu: $10$.\\
-		$\varepsilon = 0.01$
+		Długość boku kwadratu: $2$.\\
+		$\varepsilon = 0.1$
 		
 		\includegraphics[]{images/example-6.png}
 		
 		\textbf{Wyniki}:\\
-		Osiągnięto zadaną dokładność przy $n = 11$ ($242$ trójkątów przystających).\\
-		Podział trwał $22.700810$ ms.\\
-		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $4.952749$ ms.\\
-		Sprawdzanie ostatecznego błędu interpolacji trwało $0.351147$ ms.\\
-		Osiągnięto błąd interpolacji równy $0.00791773$ (zadano $0.01$).\\
-		Obliczanie wartości do wykresu trwało $11.321605$ ms.
+		Osiągnięto zadaną dokładność przy $n = 6$ ($72$ trójkątów przystających).\\
+		Podział trwał $2.642008$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $0.755809$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.065385$ ms.\\
+		Osiągnięto błąd interpolacji równy $0.0946013$ (zadano $0.1$).\\
+		Obliczanie wartości do wykresu trwało $0.144623$ ms.
+		\pagebreak
 		
 		
+		\item
+		Funkcja: $f(x, y) = x^3 - y^2$.\\
+		Lewy dolny wierzchołek kwadratu: $(0, 0)$.\\
+		Długość boku kwadratu: $2$.\\
+		$\varepsilon = 0.001$
+		
+		\includegraphics[]{images/example-7.png}
+		
+		\textbf{Wyniki}:\\
+		Osiągnięto zadaną dokładność przy $n = 19$ ($722$ trójkątów przystających).\\
+		Podział trwał $54.771794$ ms.\\
+		Obliczanie ostatecznych współczynników dla funkcji interpolujących trwało $7.175479$ ms.\\
+		Sprawdzanie ostatecznego błędu interpolacji trwało $0.567688$ ms.\\
+		Osiągnięto błąd interpolacji równy $0.000829049$ (zadano $0.001$).\\
+		Obliczanie wartości do wykresu trwało $0.313351$ ms.
 	\end{enumerate}
+	
 	
 	\section{Wnioski}
 	\begin{enumerate}
 		\item Wraz ze zmniejszaniem parametru $\varepsilon$ wykres funkcji interpolującej $p$ zbliża się do wykresu funkcji interpolowanej $f$ (przykłady 1, 2 oraz 3).
-		
-		Wraz ze zwiększaniem się dokładności, czas potrzebny na otrzymanie zadanej dokładności wygląda, jakby wzrastał wykładniczo.
-		
-		Zależności z tych przykładów te zostały pokazane na wykresach znajdujących się na rysunkach 3 oraz 4.
-		
-		
-		\begin{figure}
-			\centering
-			\includegraphics[]{images/wykres-n.png}
-			\caption{Wykres liczby $n$ w zależności od zadanej dokładności $\varepsilon$}
-			
-			\includegraphics[]{images/wykres-czas-dzielenia.png}
-			\caption{Wykres czasu podziału kwadratu w zależności od zadanej dokładności $\varepsilon$}
-		\end{figure}
 
-		\item Osiągnięcie dużej dokładności (poniżej $\varepsilon = 10^{-4}$) na dużym obszarze ($H \geq 10$) wymaga sporej ilości obliczeń (przykład 4).
+		\item Osiągnięcie dużej dokładności (poniżej $\varepsilon = 10^{-4}$) na dużym obszarze ($H \geq 10$) wymaga sporej ilości obliczeń.
 		
-		\item Istnieją funkcje, które szybko osiągają warunek stopu, ponieważ funkcja interpolująca osiąga wartości zbliżone do dokładnych w środkach ciężkości, natomiast znacznie inne poza nimi. Prezentujące to przykłady mają numery 5 oraz 6. W przykładzie 5-tym funkcja interpolująca $p$ w ogóle nie przypomina funkcji interpolowanej $f$, ponieważ kwadrat, na którym odbywała się interpolacja został podzielony jedynie na dwa trójkąty, dla których warunek stopu został od razu spełniony. Funkcja interpolująca z przykładu 6 dużo lepiej odwzorowuje funkcję interpolowaną.
+		\item Interpolacja ta ma podobne wyniki do interpolacji z podziałem na $n^2$ kwadratów, ponieważ układy równań liniowych rozwiązywane dla każdego kwadratu okazują się być bardzo podobne.
 	\end{enumerate}
 
-	\pagebreak
 	
 	\section{Funkcja do testowania}
 	Do sprawdzenia funkcji, które nie zostały udostępnione w interfejsie graficznym należy wykorzystać funkcję \textit{interpolateSquare}. Ta funkcja udostępnia funkcjonalność analogiczną do interfejsu graficznego.
@@ -271,6 +276,8 @@
 		\includegraphics[scale=1]{images/gui.png}
 		\caption{Interfejs graficzny}
 	\end{figure}
+	
+	\pagebreak
 	
 	\section{Bibliografia}
 	\begin{enumerate}
